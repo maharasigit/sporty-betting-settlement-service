@@ -47,5 +47,13 @@ public class EventOutcomeEntity {
 		this.eventWinnerId = eventWinnerId;
 	}
     
+	@Override
+	public String toString() {
+	    return "EventOutcomeEntity{" +
+	            "eventId='" + eventId + '\'' +
+	            ", eventName='" + eventName + '\'' +
+	            ", eventWinnerId='" + eventWinnerId + '\'' +
+	            '}';
+	}
     
 }
