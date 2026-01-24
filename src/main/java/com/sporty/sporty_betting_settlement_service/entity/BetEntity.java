@@ -80,6 +80,13 @@ public class BetEntity {
 	public void setBetAmount(double betAmount) {
 		this.betAmount = betAmount;
 	}
+
+
+	@Override
+	public String toString() {
+		return "BetEntity [betId=" + betId + ", userId=" + userId + ", eventId=" + eventId + ", eventMarketId="
+				+ eventMarketId + ", eventWinnerId=" + eventWinnerId + ", betAmount=" + betAmount + "]";
+	}
     
     
 }
