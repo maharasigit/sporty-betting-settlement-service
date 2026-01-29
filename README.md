@@ -42,3 +42,10 @@ Password: ilikesporty@26
 **7. Submit Event Outcomes**
 Enter a unique Event ID, Event Name, and Event Winner ID in the UI.
 Event outcomes will be sent to Kafka and settled bets updated via the mock RocketMQ consumer.
+
+
+
+
+**Idempotency:** The EventOutcomeConsumer implements a "Check-then-Act" pattern using the BetStatus state machine. This prevents financial discrepancies in the event of Kafka message re-delivery.
+
+**Atomicity:** By utilizing Spring's @Transactional boundary, the application guarantees that a bet is only marked as settled if the database persistence is successful, maintaining a consistent state between the event log and the system of record.
