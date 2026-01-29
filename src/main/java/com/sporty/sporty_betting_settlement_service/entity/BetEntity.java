@@ -2,8 +2,10 @@ package com.sporty.sporty_betting_settlement_service.entity;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Enumerated;
 
 
 @Entity
@@ -28,22 +30,38 @@ public class BetEntity {
     
     private double betAmount;
     
+ // --- NEW STATUS FIELD ---
+    @Enumerated(EnumType.STRING)
+    private BetStatus status = BetStatus.OPEN;
+    
 
     public BetEntity() {
     }
 
     
-	public BetEntity(String betId, String userId, String eventId, String eventMarketId, String eventWinnerId,
-			double betAmount) {
-		
+    public BetEntity(String betId, String userId, String eventId, String eventMarketId, 
+            String eventWinnerId, double betAmount, BetStatus status) {
 		this.betId = betId;
 		this.userId = userId;
 		this.eventId = eventId;
 		this.eventMarketId = eventMarketId;
 		this.eventWinnerId = eventWinnerId;
 		this.betAmount = betAmount;
-	}
+		this.status = (status != null) ? status : BetStatus.OPEN;
+    }
+    
+    
 	
+	public BetStatus getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(BetStatus status) {
+		this.status = status;
+	}
+
+
 	public String getBetId() {
 		return betId;
 	}
@@ -85,7 +103,8 @@ public class BetEntity {
 	@Override
 	public String toString() {
 		return "BetEntity [betId=" + betId + ", userId=" + userId + ", eventId=" + eventId + ", eventMarketId="
-				+ eventMarketId + ", eventWinnerId=" + eventWinnerId + ", betAmount=" + betAmount + "]";
+				+ eventMarketId + ", eventWinnerId=" + eventWinnerId + ", betAmount=" + betAmount + ", status=" + status
+				+ "]";
 	}
     
     
