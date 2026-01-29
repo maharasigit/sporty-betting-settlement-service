@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.sporty.sporty_betting_settlement_service.entity.AppUser;
 import com.sporty.sporty_betting_settlement_service.entity.BetEntity;
+import com.sporty.sporty_betting_settlement_service.entity.BetStatus;
 import com.sporty.sporty_betting_settlement_service.repositories.BetRepository;
 import com.sporty.sporty_betting_settlement_service.repositories.UserRepository;
 
@@ -43,9 +44,9 @@ public class DataInitializer implements CommandLineRunner {
         // --- Initialize bets ---
         if (betRepository.count() == 0) { // avoid duplicates on restart
             betRepository.saveAll(List.of(
-                new BetEntity("Betid_1", "user1", "Event_1", "Event1_Market1", null, 100.0),
-                new BetEntity("Betid_2", "user2", "Event_2", "Event2_Market2", null, 150.0),
-                new BetEntity("Betid_3", "user3", "Event_3", "Event3_Market3", null, 200.0)
+            		new BetEntity("Betid_1", "user1", "Event_1", "Event1_Market1", null, 100.0, BetStatus.OPEN),
+                    new BetEntity("Betid_2", "user2", "Event_2", "Event2_Market2", null, 150.0, BetStatus.OPEN),
+                    new BetEntity("Betid_3", "user3", "Event_3", "Event3_Market3", null, 200.0, BetStatus.OPEN)
             ));
             System.out.println("Initial bets added to H2 database");
         }
